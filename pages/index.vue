@@ -1,72 +1,36 @@
 <script setup lang="ts">
 import gsap from "gsap";
 
-const images = ref([
-  "https://placehold.co/600x400",
-  "https://placehold.co/600x400",
-  "https://placehold.co/600x400",
-  "https://placehold.co/600x400",
-  "https://placehold.co/600x400",
-  "https://placehold.co/600x400",
-  "https://placehold.co/600x400",
-  "https://placehold.co/600x400",
-  "https://placehold.co/600x400",
-  "https://placehold.co/600x400",
-  "https://placehold.co/600x400",
-  "https://placehold.co/600x400",
-  "https://placehold.co/600x400",
-  "https://placehold.co/600x400",
-  "https://placehold.co/600x400",
-  "https://placehold.co/600x400",
-  "https://placehold.co/600x400",
-  "https://placehold.co/600x400",
-  "https://placehold.co/600x400",
-  "https://placehold.co/600x400",
-]);
-
 onMounted(() => {
-  
 
   function isInViewport(el: Element) {
-        const rect = el.getBoundingClientRect();
-        return (
-          rect.top >= 0 &&
-          rect.left >= 0 &&
-          rect.bottom <=
-            (window.innerHeight || document.documentElement.clientHeight) &&
-          rect.right <=
-            (window.innerWidth || document.documentElement.clientWidth)
-        );
-      }
-      const rows = document.querySelectorAll(".row");
-      rows.forEach((row) => {
-        if (isInViewport(row)) {
-          const img = row.querySelector("img");
-          if (row.querySelector(".left")) {
-            gsap.to(img, {
-              clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-            });
-          } else {
-            gsap.to(img, {
-              clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-            });
+          const rect = el.getBoundingClientRect();
+          return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <=
+              (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <=
+              (window.innerWidth || document.documentElement.clientWidth)
+          );
+        }
+        const rows = document.querySelectorAll(".row");
+        rows.forEach((row) => {
+          if (isInViewport(row)) {
+            const img = row.querySelector("img");
+            if (row.querySelector(".left")) {
+              gsap.to(img, {
+                clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+              });
+            } else {
+              gsap.to(img, {
+                clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+              });
+            }
           }
-        }
-      });
-      (gsap.utils.toArray(".img-container.right img") as HTMLElement[]).forEach(
-        (img: HTMLElement) => {
-          gsap.to("img", {
-            clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-            scrollTrigger: {
-              trigger: img,
-              start: "top 75%",
-              end: "bottom 70%",
-              scrub: true,
-            },
-          });
-        }
-      );
-      (gsap.utils.toArray(".img-container.left img") as HTMLElement[]).forEach(
+        });
+
+        (gsap.utils.toArray(".img-container.right img") as HTMLElement[]).forEach(
         (img: HTMLElement) => {
           gsap.to(img, {
             clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
@@ -77,22 +41,44 @@ onMounted(() => {
               scrub: true,
             },
           });
-        }
-      );
+        });
+
+        (gsap.utils.toArray(".img-container.left img") as HTMLElement[]).forEach(
+        (img: HTMLElement) => {
+          gsap.to(img, {
+            clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+            scrollTrigger: {
+              trigger: img,
+              start: "top 75%",
+              end: "bottom 70%",
+              scrub: true,
+            },
+          });
+        });
+
+        (gsap.utils.toArray(".img-container p")as HTMLElement[]).forEach((text) => {
+          gsap.from(text, {
+            opacity: 0,
+            y: 20,
+            scrollTrigger: {
+              trigger: text,
+              start: "top 90%",
+              toggleActions: "play none none reverse",
+            },
+          });
+        });
 
 });
 </script>
 
 <template>
  <div>
-  <div class="header">
-      <p>Scroll To Reveal</p>
-      <p>Codegrid</p>
-    </div>
+  <div class="header"> </div>
+
     <div class="container">
       <div class="row" id="row-1">
         <div class="col">
-          <div class="img-container right">
+          <div class="canvas img-container right">
             <img src="/0.jpg" alt="" />
             <p>Lunar dreamscape</p>
           </div>
@@ -102,7 +88,7 @@ onMounted(() => {
       <div class="row" id="row-2">
         <div class="col"></div>
         <div class="col">
-          <div class="img-container left">
+          <div class=" canvas img-container left">
             <img src="/1.jpg" alt="" />
             <p>Futuristic control relic</p>
           </div>
@@ -110,7 +96,7 @@ onMounted(() => {
       </div>
       <div class="row" id="row-3">
         <div class="col">
-          <div class="img-container right">
+          <div class=" canvas img-container right">
             <img src="/2.jpg" alt="" />
             <p>Neo-Tokyo crimson glow</p>
           </div>
@@ -120,7 +106,7 @@ onMounted(() => {
       <div class="row" id="row-4">
         <div class="col"></div>
         <div class="col">
-          <div class="img-container left">
+          <div class=" canvas img-container left">
             <img src="/3.jpg" alt="" />
             <p>Galactic ocean abyss</p>
           </div>
@@ -128,7 +114,7 @@ onMounted(() => {
       </div>
       <div class="row" id="row-5">
         <div class="col">
-          <div class="img-container right">
+          <div class=" canvas img-container right">
             <img src="/4.jpg" alt="" />
             <p>Hued cosmic dust</p>
           </div>
@@ -138,8 +124,44 @@ onMounted(() => {
       <div class="row" id="row-6">
         <div class="col"></div>
         <div class="col">
-          <div class="img-container left">
+          <div class="canvas img-container left">
             <img src="/5.jpg" alt="" />
+            <p>Silent sentinel</p>
+          </div>
+        </div>
+      </div>
+      <div class="row" id="row-7">
+        <div class="col">
+          <div class=" canvas img-container right">
+            <img src="/6.jpg" alt="" />
+            <p>Hued cosmic dust</p>
+          </div>
+        </div>
+        <div class="col"></div>
+      </div>
+      <div class="row" id="row-8">
+        <div class="col"></div>
+        <div class="col">
+          <div class="canvas img-container left">
+            <img src="/7.jpg" alt="" />
+            <p>Silent sentinel</p>
+          </div>
+        </div>
+      </div>
+      <div class="row" id="row-9">
+        <div class="col">
+          <div class=" canvas img-container right">
+            <img src="/8.jpg" alt="" />
+            <p>Hued cosmic dust</p>
+          </div>
+        </div>
+        <div class="col"></div>
+      </div>
+      <div class="row" id="row-10">
+        <div class="col"></div>
+        <div class="col">
+          <div class="canvas img-container left">
+            <img src="/9.jpg" alt="" />
             <p>Silent sentinel</p>
           </div>
         </div>
@@ -147,12 +169,13 @@ onMounted(() => {
 
       <div class="whitespace"></div>
     </div>
+
  </div>
 </template>
-<style>
+<style >
 :root {
-  --color-bg: #7f0101;
-  --color-text: #fc3333;
+  --color-bg: #000000;
+  --color-text: #ffffff;
 }
 
 * {
@@ -171,7 +194,7 @@ body {
 
 .header {
   width: 100%;
-  height: 300px;
+  height:400px;
   padding: 1em;
   display: flex;
   justify-content: space-between;
@@ -188,7 +211,7 @@ p {
 img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: fill;
 }
 
 .container {
@@ -223,7 +246,7 @@ img {
 }
 
 #row-1 {
-  height: 200px;
+  height: 300px;
 }
 
 #row-2 {
@@ -231,19 +254,19 @@ img {
 }
 
 #row-3 {
-  height: 150px;
+  height: 300px;
 }
 
 #row-4 {
-  height: 400px;
+  height: 500px;
 }
 
 #row-5 {
-  height: 700px;
+  height: 300px;
 }
 
 #row-6 {
-  height: 300px;
+  height: 400px;
 }
 
 #row-7 {
@@ -272,6 +295,7 @@ img {
   flex: 5;
 }
 
+
 .img-container.right img {
   clip-path: polygon(100% 0, 100% 0, 100% 0, 100% 0);
 }
@@ -279,6 +303,7 @@ img {
 .img-container.left img {
   clip-path: polygon(0 0, 0 0, 0 0, 0 0);
 }
+
 
 .whitespace {
   width: 100%;
